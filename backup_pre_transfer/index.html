@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ZenFlow — Take a little break. Mind-refreshing mini-games, guided breathing exercises, and personal activity tracking to reset and refocus.">
+  <meta name="keywords" content="zenflow, mind break, mini games, bubble pop, breathing exercise, memory tiles, color challenge, relaxation">
+  <meta name="theme-color" content="#090a16">
+  
+  <title>ZenFlow — Take a Little Break</title>
+
+  <!-- Google Fonts Preconnect & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preload Splash Screen Image -->
+  <link rel="preload" as="image" href="assets/zenflow-splash.png">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ==================== SPLASH SCREEN ==================== -->
+  <aside id="zen-splash-screen" class="zen-splash-screen" aria-label="ZenFlow Splash Screen" role="dialog" aria-modal="true">
+    <div class="zen-splash-particles" id="zen-splash-particles" aria-hidden="true">
+      <span class="zen-splash-star" style="top: 15%; left: 18%; --twinkle-delay: 0.1s; --twinkle-dur: 2.6s; width: 3px; height: 3px;"></span>
+      <span class="zen-splash-star" style="top: 24%; left: 78%; --twinkle-delay: 0.7s; --twinkle-dur: 3.2s; width: 2px; height: 2px; --star-glow: rgba(56, 189, 248, 0.75);"></span>
+      <span class="zen-splash-star" style="top: 38%; left: 12%; --twinkle-delay: 1.2s; --twinkle-dur: 2.9s; width: 2px; height: 2px;"></span>
+      <span class="zen-splash-star" style="top: 28%; left: 88%; --twinkle-delay: 0.4s; --twinkle-dur: 3.5s; width: 3px; height: 3px;"></span>
+      <span class="zen-splash-star" style="top: 66%; left: 15%; --twinkle-delay: 0.9s; --twinkle-dur: 2.7s; width: 2.5px; height: 2.5px; --star-glow: rgba(56, 189, 248, 0.75);"></span>
+      <span class="zen-splash-star" style="top: 72%; left: 82%; --twinkle-delay: 1.5s; --twinkle-dur: 3.1s; width: 3px; height: 3px;"></span>
+      <span class="zen-splash-star" style="top: 84%; left: 24%; --twinkle-delay: 0.3s; --twinkle-dur: 2.4s; width: 2px; height: 2px;"></span>
+      <span class="zen-splash-star" style="top: 82%; left: 72%; --twinkle-delay: 1.1s; --twinkle-dur: 3.4s; width: 2px; height: 2px;"></span>
+      <span class="zen-splash-star" style="top: 18%; left: 45%; --twinkle-delay: 1.8s; --twinkle-dur: 2.8s; width: 2px; height: 2px;"></span>
+      <span class="zen-splash-star" style="top: 62%; left: 7%; --twinkle-delay: 0.5s; --twinkle-dur: 3.0s; width: 2px; height: 2px;"></span>
+      <span class="zen-splash-star" style="top: 48%; left: 91%; --twinkle-delay: 1.3s; --twinkle-dur: 2.5s; width: 3px; height: 3px;"></span>
+      <span class="zen-splash-star" style="top: 9%; left: 84%; --twinkle-delay: 0.8s; --twinkle-dur: 3.3s; width: 2.5px; height: 2.5px;"></span>
+      <span class="zen-splash-star" style="top: 88%; left: 48%; --twinkle-delay: 0.6s; --twinkle-dur: 2.9s; width: 2px; height: 2px; --star-glow: rgba(167, 139, 250, 0.75);"></span>
+      <span class="zen-splash-star" style="top: 12%; left: 32%; --twinkle-delay: 1.4s; --twinkle-dur: 3.0s; width: 2px; height: 2px;"></span>
+      <span class="zen-splash-star" style="top: 54%; left: 22%; --twinkle-delay: 0.2s; --twinkle-dur: 2.8s; width: 2.5px; height: 2.5px;"></span>
+      <span class="zen-splash-star" style="top: 58%; left: 80%; --twinkle-delay: 1.6s; --twinkle-dur: 3.2s; width: 2px; height: 2px; --star-glow: rgba(56, 189, 248, 0.75);"></span>
+    </div>
+    <div class="zen-splash-content">
+      <div class="zen-splash-logo-wrap" id="zen-splash-logo-wrap">
+        <div class="zen-splash-glow" aria-hidden="true"></div>
+        <img id="zen-splash-logo" class="zen-splash-logo" src="assets/zenflow-splash.png" alt="ZenFlow Logo" width="340" height="340">
+        <div id="zen-splash-fallback" class="zen-splash-fallback" style="display: none;" aria-hidden="true">
+          <div class="zen-splash-fallback-icon">
+            <svg viewBox="0 0 32 32" fill="none" class="zen-splash-fallback-svg" aria-hidden="true">
+              <path d="M16 3C16 3 8 13 8 19C8 23.4183 11.5817 27 16 27C20.4183 27 24 23.4183 24 19C24 13 16 3 16 3Z" fill="url(#splashBrandGrad)" />
+              <path d="M16 11C16 11 11 17.5 11 21C11 23.7614 13.2386 26 16 26C18.7614 26 21 23.7614 21 21C21 17.5 16 11 16 11Z" fill="url(#splashBrandInnerGrad)" opacity="0.85" />
+              <circle cx="16" cy="18" r="2.5" fill="#ffffff" opacity="0.9" />
+              <defs>
+                <linearGradient id="splashBrandGrad" x1="8" y1="3" x2="24" y2="27" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8b5cf6" />
+                  <stop offset="0.5" stop-color="#6366f1" />
+                  <stop offset="1" stop-color="#06b6d4" />
+                </linearGradient>
+                <linearGradient id="splashBrandInnerGrad" x1="11" y1="11" x2="21" y2="26" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#c4b5fd" />
+                  <stop offset="1" stop-color="#38bdf8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="zen-splash-fallback-title">ZenFlow</span>
+        </div>
+      </div>
+      <p class="zen-splash-tagline" id="zen-splash-tagline">
+        <span class="zen-splash-tagline-sparkle" aria-hidden="true">✦</span>
+        <span class="zen-splash-tagline-text">Take a Little Break</span>
+        <span class="zen-splash-tagline-sparkle" aria-hidden="true">✦</span>
+      </p>
+    </div>
+  </aside>
+
+  <!-- Ambient Floating Background Particles Canvas -->
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <div class="app-container" id="app-container">
+    
+    <!-- ==================== SIDEBAR / NAVIGATION ==================== -->
+    <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+      <div class="sidebar-brand">
+        <a href="#dashboard" class="brand-link" id="brand-logo-link" aria-label="ZenFlow Home">
+          <div class="brand-logo-icon">
+            <!-- Zen Lotus / Drop Icon -->
+            <svg viewBox="0 0 32 32" fill="none" class="svg-icon">
+              <path d="M16 3C16 3 8 13 8 19C8 23.4183 11.5817 27 16 27C20.4183 27 24 23.4183 24 19C24 13 16 3 16 3Z" fill="url(#brandGrad)" />
+              <path d="M16 11C16 11 11 17.5 11 21C11 23.7614 13.2386 26 16 26C18.7614 26 21 23.7614 21 21C21 17.5 16 11 16 11Z" fill="url(#brandInnerGrad)" opacity="0.85" />
+              <circle cx="16" cy="18" r="2.5" fill="#ffffff" opacity="0.9" />
+              <defs>
+                <linearGradient id="brandGrad" x1="8" y1="3" x2="24" y2="27" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#8b5cf6" />
+                  <stop offset="0.5" stop-color="#6366f1" />
+                  <stop offset="1" stop-color="#06b6d4" />
+                </linearGradient>
+                <linearGradient id="brandInnerGrad" x1="11" y1="11" x2="21" y2="26" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#c4b5fd" />
+                  <stop offset="1" stop-color="#38bdf8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">ZenFlow</span>
+            <span class="brand-tagline">Take a Little Break</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Main sections">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <button class="nav-link active" data-view="dashboard" id="nav-btn-dashboard" aria-current="page">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="9" rx="1.5" />
+                  <rect x="14" y="3" width="7" height="5" rx="1.5" />
+                  <rect x="14" y="12" width="7" height="9" rx="1.5" />
+                  <rect x="3" y="16" width="7" height="5" rx="1.5" />
+                </svg>
+              </span>
+              <span class="nav-label">Dashboard</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-view="games" id="nav-btn-games">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="6 3 20 12 6 21 6 3" />
+                  <line x1="6" y1="12" x2="14" y2="12" />
+                </svg>
+              </span>
+              <span class="nav-label">Mini-Games</span>
+              <span class="nav-badge">4</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-view="breathing" id="nav-btn-breathing">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                  <path d="M7.5 12a4.5 4.5 0 0 1 9 0" />
+                </svg>
+              </span>
+              <span class="nav-label">Breathing Room</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-view="progress" id="nav-btn-progress">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 20V10" />
+                  <path d="M12 20V4" />
+                  <path d="M6 20v-6" />
+                </svg>
+              </span>
+              <span class="nav-label">Daily Progress</span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-view="settings" id="nav-btn-settings">
+              <span class="nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3" />
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+              </span>
+              <span class="nav-label">Settings</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Mini Streak Widget -->
+      <div class="sidebar-streak-card" id="sidebar-streak-card">
+        <div class="streak-icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="streak-flame-svg">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+          </svg>
+        </div>
+        <div class="streak-info">
+          <div class="streak-count" id="sidebar-streak-value">0 Days</div>
+          <div class="streak-label">Daily Break Streak</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+    <div class="main-wrapper">
+      
+      <!-- Top Application Header -->
+      <header class="app-header" id="app-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <div class="page-breadcrumbs" id="page-breadcrumbs">
+            <span class="breadcrumb-item" id="breadcrumb-current">Dashboard</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Today's quick session pill -->
+          <div class="header-stat-pill" title="Today's Mindful Breaks">
+            <span class="stat-pill-dot" aria-hidden="true"></span>
+            <span class="stat-pill-text"><strong id="header-today-sessions">0</strong> breaks today</span>
+          </div>
+
+          <!-- Quick Audio Mute / Unmute Toggle -->
+          <button class="header-icon-btn" id="header-audio-toggle" title="Toggle Sound Effects" aria-label="Toggle sound">
+            <svg id="header-audio-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+            </svg>
+            <svg id="header-audio-icon-off" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <line x1="23" y1="9" x2="17" y2="15" />
+              <line x1="17" y1="9" x2="23" y2="15" />
+            </svg>
+          </button>
+
+          <!-- Theme Toggle (Dark / Light) -->
+          <button class="header-icon-btn" id="header-theme-toggle" title="Switch Theme" aria-label="Toggle dark or light theme">
+            <!-- Moon icon (when in light) -->
+            <svg id="theme-icon-moon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <!-- Sun icon (when in dark) -->
+            <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Application Views Container -->
+      <main class="content-container" id="content-container">
+
+        <!-- ==================== VIEW 1: HOME DASHBOARD ==================== -->
+        <section class="view-section active" id="view-dashboard" aria-labelledby="dashboard-heading">
+          
+          <!-- Hero Banner -->
+          <div class="dashboard-hero-card">
+            <div class="hero-content">
+              <div class="hero-badge">
+                <span class="pulse-indicator"></span>
+                <span>Mindful Refresh</span>
+              </div>
+              <h1 class="hero-title" id="dashboard-heading">
+                <span id="dashboard-greeting">Welcome to ZenFlow</span>
+              </h1>
+              <p class="hero-description">
+                Step away from screens and stress. Pick a relaxing 30-second challenge or gentle guided breathing to recharge your focus.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-primary btn-lg" id="btn-quick-break" data-action="quick-break">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-icon">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span>Start a Quick Break</span>
+                </button>
+                <button class="btn btn-glass btn-lg" id="btn-quick-breathe" data-navigate="breathing">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-icon">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 3" />
+                  </svg>
+                  <span>1-Min Breathing</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-decoration" aria-hidden="true">
+              <div class="floating-orb orb-1"></div>
+              <div class="floating-orb orb-2"></div>
+              <div class="floating-orb orb-3"></div>
+              <div class="hero-graphic">
+                <svg viewBox="0 0 160 160" fill="none">
+                  <circle cx="80" cy="80" r="70" stroke="url(#heroRingGrad)" stroke-width="2" stroke-dasharray="8 8" opacity="0.6" />
+                  <circle cx="80" cy="80" r="50" stroke="url(#heroRingGrad2)" stroke-width="2" opacity="0.8" />
+                  <circle cx="80" cy="80" r="28" fill="url(#heroCoreGrad)" />
+                  <defs>
+                    <linearGradient id="heroRingGrad" x1="10" y1="10" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#8b5cf6" />
+                      <stop offset="1" stop-color="#06b6d4" />
+                    </linearGradient>
+                    <linearGradient id="heroRingGrad2" x1="30" y1="30" x2="130" y2="130" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#ec4899" />
+                      <stop offset="1" stop-color="#8b5cf6" />
+                    </linearGradient>
+                    <linearGradient id="heroCoreGrad" x1="52" y1="52" x2="108" y2="108" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#6366f1" />
+                      <stop offset="1" stop-color="#06b6d4" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Stats Overview Grid -->
+          <div class="dashboard-stats-grid">
+            <div class="stat-card" id="card-stat-today">
+              <div class="stat-icon-wrapper icon-violet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                </svg>
+              </div>
+              <div class="stat-body">
+                <div class="stat-value" id="dash-stat-today-sessions">0</div>
+                <div class="stat-label">Breaks Today</div>
+              </div>
+            </div>
+
+            <div class="stat-card" id="card-stat-streak">
+              <div class="stat-icon-wrapper icon-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                </svg>
+              </div>
+              <div class="stat-body">
+                <div class="stat-value" id="dash-stat-streak">0</div>
+                <div class="stat-label">Day Streak</div>
+              </div>
+            </div>
+
+            <div class="stat-card" id="card-stat-bubbles">
+              <div class="stat-icon-wrapper icon-cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="8" />
+                  <circle cx="8" cy="8" r="2" />
+                </svg>
+              </div>
+              <div class="stat-body">
+                <div class="stat-value" id="dash-stat-bubbles-popped">0</div>
+                <div class="stat-label">Bubbles Popped</div>
+              </div>
+            </div>
+
+            <div class="stat-card" id="card-stat-breathing">
+              <div class="stat-icon-wrapper icon-emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+              </div>
+              <div class="stat-body">
+                <div class="stat-value" id="dash-stat-breathing-mins">0m</div>
+                <div class="stat-label">Mindful Minutes</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Activity & Breathing Prompt -->
+          <div class="dashboard-featured-row">
+            <!-- Featured Mini-Game Card -->
+            <div class="featured-game-card">
+              <div class="featured-badge">Featured Activity</div>
+              <div class="featured-content">
+                <div class="featured-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8" />
+                    <circle cx="9" cy="9" r="2" />
+                    <circle cx="16" cy="15" r="1.5" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="featured-title">Bubble Pop Relax</h3>
+                  <p class="featured-desc">Pop floating ambient bubbles to melt tension away. Crisp sound effects and smooth fluid dynamics.</p>
+                </div>
+              </div>
+              <div class="featured-footer">
+                <span class="game-meta-tag">30 Seconds</span>
+                <span class="game-meta-tag">High Replay</span>
+                <button class="btn btn-primary btn-sm play-game-btn" data-game="bubblePop">
+                  <span>Play Now</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Gentle Breathing Callout -->
+            <div class="breathing-prompt-card">
+              <div class="breathing-prompt-circle-anim" aria-hidden="true">
+                <div class="breathing-pulse-ring"></div>
+                <div class="breathing-pulse-core"></div>
+              </div>
+              <div class="breathing-prompt-text">
+                <h3 class="breathing-prompt-title">Take a Deep Breath</h3>
+                <p class="breathing-prompt-desc">Slow your heart rate and center your focus with a 4-6 calm breathing rhythm.</p>
+                <button class="btn btn-secondary btn-sm" data-navigate="breathing">
+                  <span>Enter Breathing Room</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mini-Games Selection Grid -->
+          <div class="dashboard-section-header">
+            <div>
+              <h2 class="section-title">Mind Refresh Mini-Games</h2>
+              <p class="section-subtitle">Playable in 30 seconds. Designed to relieve fatigue and spark cognitive flow.</p>
+            </div>
+            <button class="btn-link" data-navigate="games">View All Games &rarr;</button>
+          </div>
+
+          <div class="games-grid">
+            <!-- 1. Bubble Pop -->
+            <article class="game-card" data-game="bubblePop">
+              <div class="game-card-banner banner-bubble">
+                <div class="game-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8" />
+                    <circle cx="9" cy="9" r="2" />
+                  </svg>
+                </div>
+                <span class="game-best-pill" id="badge-best-bubblePop">Best: 0</span>
+              </div>
+              <div class="game-card-body">
+                <h3 class="game-card-title">Bubble Pop</h3>
+                <p class="game-card-desc">Satisfying bubble bursts with fluid physics, combos, and gentle pop audio.</p>
+                <div class="game-card-footer">
+                  <span class="time-tag">30s Game</span>
+                  <button class="btn btn-secondary btn-sm play-game-btn" data-game="bubblePop">Play</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- 2. Colour Flow -->
+            <article class="game-card" data-game="colourFlow">
+              <div class="game-card-banner banner-colour">
+                <div class="game-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a10 10 0 0 1 10 10" stroke-width="3" stroke="#f43f5e" />
+                    <path d="M12 22a10 10 0 0 1-10-10" stroke-width="3" stroke="#06b6d4" />
+                  </svg>
+                </div>
+                <span class="game-best-pill" id="badge-best-colourFlow">Best: 0</span>
+              </div>
+              <div class="game-card-body">
+                <h3 class="game-card-title">Colour Flow</h3>
+                <p class="game-card-desc">Rapid colour and symbol recognition challenge. Accessible with visual pattern cues.</p>
+                <div class="game-card-footer">
+                  <span class="time-tag">30s Game</span>
+                  <button class="btn btn-secondary btn-sm play-game-btn" data-game="colourFlow">Play</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Memory Tiles -->
+            <article class="game-card" data-game="memoryTiles">
+              <div class="game-card-banner banner-memory">
+                <div class="game-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="8" height="8" rx="2" />
+                    <rect x="13" y="3" width="8" height="8" rx="2" />
+                    <rect x="3" y="13" width="8" height="8" rx="2" />
+                    <rect x="13" y="13" width="8" height="8" rx="2" />
+                  </svg>
+                </div>
+                <span class="game-best-pill" id="badge-best-memoryTiles">Lvl: 0</span>
+              </div>
+              <div class="game-card-body">
+                <h3 class="game-card-title">Memory Tiles</h3>
+                <p class="game-card-desc">Simon-style audio-visual sequence challenge. Test and train your short-term recall.</p>
+                <div class="game-card-footer">
+                  <span class="time-tag">Progressive</span>
+                  <button class="btn btn-secondary btn-sm play-game-btn" data-game="memoryTiles">Play</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4. Star Hunt -->
+            <article class="game-card" data-game="starHunt">
+              <div class="game-card-banner banner-star">
+                <div class="game-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+                <span class="game-best-pill" id="badge-best-starHunt">Best: 0</span>
+              </div>
+              <div class="game-card-body">
+                <h3 class="game-card-title">Star Hunt</h3>
+                <p class="game-card-desc">Catch sparkling celestial stars before they fade into the cosmic night sky.</p>
+                <div class="game-card-footer">
+                  <span class="time-tag">30s Game</span>
+                  <button class="btn btn-secondary btn-sm play-game-btn" data-game="starHunt">Play</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Recent Activity & Quick Settings Strip -->
+          <div class="dashboard-bottom-grid">
+            <div class="recent-activity-panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Recent Activity</h3>
+                <button class="btn-link-subtle" data-navigate="progress">Full History &rarr;</button>
+              </div>
+              <div class="recent-list-container" id="dash-recent-list">
+                <!-- Dynamically populated or empty state -->
+                <div class="empty-state-box">
+                  <div class="empty-state-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                  </div>
+                  <p class="empty-state-title">No breaks recorded yet today</p>
+                  <p class="empty-state-desc">Play a quick mini-game or complete a breathing exercise to begin your journey!</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Settings / Info Shortcut Card -->
+            <div class="quick-settings-panel">
+              <div class="panel-header">
+                <h3 class="panel-title">Mindful Preferences</h3>
+                <button class="btn-link-subtle" data-navigate="settings">Manage</button>
+              </div>
+              <div class="quick-settings-content">
+                <div class="preference-row">
+                  <div class="preference-info">
+                    <span class="pref-title">Sound Effects</span>
+                    <span class="pref-desc">Web Audio synthesized chimes</span>
+                  </div>
+                  <button class="toggle-switch" id="dash-sound-toggle" role="switch" aria-checked="true" aria-label="Toggle sound effects">
+                    <span class="toggle-slider"></span>
+                  </button>
+                </div>
+                <div class="preference-row">
+                  <div class="preference-info">
+                    <span class="pref-title">Cosmic Atmosphere</span>
+                    <span class="pref-desc">Ambient floating particles</span>
+                  </div>
+                  <button class="toggle-switch" id="dash-particles-toggle" role="switch" aria-checked="true" aria-label="Toggle floating particles">
+                    <span class="toggle-slider"></span>
+                  </button>
+                </div>
+                <div class="zen-tip-box">
+                  <div class="tip-icon" aria-hidden="true">💡</div>
+                  <div class="tip-text">
+                    <strong>Micro-break Tip:</strong> Even a 30-second pause relaxes the visual cortex and reduces cognitive fatigue by up to 28%.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================== VIEW 2: MINI-GAMES HUB ==================== -->
+        <section class="view-section" id="view-games" aria-labelledby="games-heading">
+          <div class="section-title-wrap">
+            <h1 class="view-main-title" id="games-heading">Mini-Games Hub</h1>
+            <p class="view-main-subtitle">Choose a quick interactive break to recharge your mental energy.</p>
+          </div>
+
+          <!-- All Games Directory Cards -->
+          <div class="games-hub-grid">
+            <!-- Game 1: Bubble Pop -->
+            <div class="hub-game-card">
+              <div class="hub-card-header bg-gradient-bubble">
+                <div class="hub-game-badge">30s Timed</div>
+                <div class="hub-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8" />
+                    <circle cx="9" cy="9" r="2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="hub-card-body">
+                <div class="hub-header-row">
+                  <h2 class="hub-game-title">Bubble Pop</h2>
+                  <span class="hub-score-tag" id="hub-best-bubblePop">Best: 0</span>
+                </div>
+                <p class="hub-game-desc">A tactile stress-relief game. Tap floating orbs to pop them before time runs out. Faster pops trigger combo multiplier multipliers.</p>
+                <div class="hub-features">
+                  <span class="feature-chip">Tactile Sounds</span>
+                  <span class="feature-chip">Combo Multipliers</span>
+                  <span class="feature-chip">Stress Relief</span>
+                </div>
+                <button class="btn btn-primary btn-block play-game-btn" data-game="bubblePop">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span>Launch Bubble Pop</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Game 2: Colour Flow -->
+            <div class="hub-game-card">
+              <div class="hub-card-header bg-gradient-colour">
+                <div class="hub-game-badge">30s Timed</div>
+                <div class="hub-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="2" x2="12" y2="22" />
+                  </svg>
+                </div>
+              </div>
+              <div class="hub-card-body">
+                <div class="hub-header-row">
+                  <h2 class="hub-game-title">Colour Flow</h2>
+                  <span class="hub-score-tag" id="hub-best-colourFlow">Best: 0</span>
+                </div>
+                <p class="hub-game-desc">Test your perception by identifying the target hue. Includes shape symbols and accessible cues to support all players.</p>
+                <div class="hub-features">
+                  <span class="feature-chip">Pattern Cues</span>
+                  <span class="feature-chip">Focus Training</span>
+                  <span class="feature-chip">Accessible</span>
+                </div>
+                <button class="btn btn-primary btn-block play-game-btn" data-game="colourFlow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span>Launch Colour Flow</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Game 3: Memory Tiles -->
+            <div class="hub-game-card">
+              <div class="hub-card-header bg-gradient-memory">
+                <div class="hub-game-badge">Pattern Recall</div>
+                <div class="hub-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="8" height="8" rx="2" />
+                    <rect x="13" y="3" width="8" height="8" rx="2" />
+                    <rect x="3" y="13" width="8" height="8" rx="2" />
+                    <rect x="13" y="13" width="8" height="8" rx="2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="hub-card-body">
+                <div class="hub-header-row">
+                  <h2 class="hub-game-title">Memory Tiles</h2>
+                  <span class="hub-score-tag" id="hub-best-memoryTiles">Lvl: 0</span>
+                </div>
+                <p class="hub-game-desc">Listen and watch the harmonic sequence, then repeat it accurately. Each successful stage introduces an additional note.</p>
+                <div class="hub-features">
+                  <span class="feature-chip">Harmonic Chords</span>
+                  <span class="feature-chip">Memory Training</span>
+                  <span class="feature-chip">No Time Pressure</span>
+                </div>
+                <button class="btn btn-primary btn-block play-game-btn" data-game="memoryTiles">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span>Launch Memory Tiles</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Game 4: Star Hunt -->
+            <div class="hub-game-card">
+              <div class="hub-card-header bg-gradient-star">
+                <div class="hub-game-badge">30s Timed</div>
+                <div class="hub-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+              <div class="hub-card-body">
+                <div class="hub-header-row">
+                  <h2 class="hub-game-title">Star Hunt</h2>
+                  <span class="hub-score-tag" id="hub-best-starHunt">Best: 0</span>
+                </div>
+                <p class="hub-game-desc">Cosmic observation and reaction challenge. Spot and capture stars as they twinkle and orbit in a peaceful night sky.</p>
+                <div class="hub-features">
+                  <span class="feature-chip">Calming Cosmos</span>
+                  <span class="feature-chip">Reflex Spark</span>
+                  <span class="feature-chip">Star Chimes</span>
+                </div>
+                <button class="btn btn-primary btn-block play-game-btn" data-game="starHunt">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span>Launch Star Hunt</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== PLAY AREA: BUBBLE POP ==================== -->
+        <section class="game-arena-section" id="arena-bubblePop" aria-label="Bubble Pop Arena" hidden>
+          <div class="arena-header">
+            <button class="btn btn-glass btn-sm back-to-hub-btn" aria-label="Return to games">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              <span>Back</span>
+            </button>
+            <div class="arena-title-wrap">
+              <h2 class="arena-game-name">Bubble Pop</h2>
+              <span class="arena-mode-badge">30s Zen Mode</span>
+            </div>
+            <div class="arena-header-controls">
+              <button class="btn btn-glass btn-icon-only" id="bp-pause-btn" title="Pause / Resume" aria-label="Pause game">
+                <svg id="bp-icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </svg>
+                <svg id="bp-icon-play" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </button>
+              <button class="btn btn-glass btn-icon-only" id="bp-restart-btn" title="Restart Game" aria-label="Restart game">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6M1 20v-6h6" />
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Score & Timer Bar -->
+          <div class="arena-scoreboard">
+            <div class="hud-item">
+              <span class="hud-label">Score</span>
+              <span class="hud-value hud-score" id="bp-score-val">0</span>
+            </div>
+            <div class="hud-item hud-timer-box">
+              <span class="hud-label">Time Remaining</span>
+              <div class="timer-display-wrap">
+                <span class="hud-value hud-timer" id="bp-timer-val">30</span>
+                <span class="hud-timer-unit">s</span>
+              </div>
+              <div class="timer-bar-track">
+                <div class="timer-bar-fill" id="bp-timer-bar"></div>
+              </div>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Combo</span>
+              <span class="hud-value hud-combo" id="bp-combo-val">1x</span>
+            </div>
+          </div>
+
+          <!-- Play Field -->
+          <div class="arena-canvas-stage bubble-stage" id="bp-stage" tabindex="0" role="region" aria-label="Bubble popping play zone">
+            <!-- Bubbles injected dynamically -->
+            <div class="game-overlay-prompt" id="bp-start-overlay">
+              <div class="overlay-modal-card">
+                <div class="overlay-icon-wrap icon-cyan">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8" />
+                    <circle cx="9" cy="9" r="2" />
+                  </svg>
+                </div>
+                <h3 class="overlay-title">Ready to Pop?</h3>
+                <p class="overlay-desc">Tap or click bubbles as they float upward. Pop quickly to build up combo bonuses!</p>
+                <button class="btn btn-primary btn-lg" id="bp-start-btn">Start Game</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== PLAY AREA: COLOUR FLOW ==================== -->
+        <section class="game-arena-section" id="arena-colourFlow" aria-label="Colour Flow Arena" hidden>
+          <div class="arena-header">
+            <button class="btn btn-glass btn-sm back-to-hub-btn" aria-label="Return to games">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              <span>Back</span>
+            </button>
+            <div class="arena-title-wrap">
+              <h2 class="arena-game-name">Colour Flow</h2>
+              <span class="arena-mode-badge">30s Precision</span>
+            </div>
+            <div class="arena-header-controls">
+              <button class="btn btn-glass btn-icon-only" id="cf-restart-btn" title="Restart Game" aria-label="Restart game">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6M1 20v-6h6" />
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Score & Timer Bar -->
+          <div class="arena-scoreboard">
+            <div class="hud-item">
+              <span class="hud-label">Score</span>
+              <span class="hud-value hud-score" id="cf-score-val">0</span>
+            </div>
+            <div class="hud-item hud-timer-box">
+              <span class="hud-label">Time Remaining</span>
+              <div class="timer-display-wrap">
+                <span class="hud-value hud-timer" id="cf-timer-val">30</span>
+                <span class="hud-timer-unit">s</span>
+              </div>
+              <div class="timer-bar-track">
+                <div class="timer-bar-fill" id="cf-timer-bar"></div>
+              </div>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Streak</span>
+              <span class="hud-value hud-combo" id="cf-streak-val">0</span>
+            </div>
+          </div>
+
+          <!-- Colour Challenge Arena Container -->
+          <div class="colour-flow-stage" id="cf-stage">
+            <div class="cf-target-container">
+              <span class="cf-target-label">Target Colour &amp; Symbol</span>
+              <div class="cf-target-card" id="cf-target-swatch">
+                <div class="cf-symbol-mark" id="cf-target-symbol"></div>
+                <span class="cf-color-name" id="cf-target-name">Finding color...</span>
+              </div>
+            </div>
+
+            <div class="cf-instruction-hint">Select the matching tile below:</div>
+
+            <!-- Choice tiles grid (4 to 6 options) -->
+            <div class="cf-tiles-grid" id="cf-tiles-grid" role="group" aria-label="Colour choices">
+              <!-- Dynamically generated buttons -->
+            </div>
+
+            <!-- Pre-game overlay -->
+            <div class="game-overlay-prompt" id="cf-start-overlay">
+              <div class="overlay-modal-card">
+                <div class="overlay-icon-wrap icon-violet">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="2" x2="12" y2="22" />
+                  </svg>
+                </div>
+                <h3 class="overlay-title">Colour Flow Challenge</h3>
+                <p class="overlay-desc">Match the target swatch as quickly as you can in 30 seconds. Look at both color and the accessibility symbol!</p>
+                <button class="btn btn-primary btn-lg" id="cf-start-btn">Start Challenge</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== PLAY AREA: MEMORY TILES ==================== -->
+        <section class="game-arena-section" id="arena-memoryTiles" aria-label="Memory Tiles Arena" hidden>
+          <div class="arena-header">
+            <button class="btn btn-glass btn-sm back-to-hub-btn" aria-label="Return to games">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              <span>Back</span>
+            </button>
+            <div class="arena-title-wrap">
+              <h2 class="arena-game-name">Memory Tiles</h2>
+              <span class="arena-mode-badge">Harmonic Simon</span>
+            </div>
+            <div class="arena-header-controls">
+              <button class="btn btn-glass btn-icon-only" id="mt-restart-btn" title="Restart Game" aria-label="Restart game">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6M1 20v-6h6" />
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Score & Level Bar -->
+          <div class="arena-scoreboard">
+            <div class="hud-item">
+              <span class="hud-label">Current Level</span>
+              <span class="hud-value hud-score" id="mt-level-val">1</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Sequence Status</span>
+              <div class="mt-status-badge" id="mt-status-indicator">Press Start</div>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Best Level</span>
+              <span class="hud-value hud-combo" id="mt-best-val">0</span>
+            </div>
+          </div>
+
+          <!-- Memory Grid Stage -->
+          <div class="memory-stage" id="mt-stage">
+            <div class="memory-grid-container" id="mt-grid">
+              <!-- Tile 0: Amethyst Violet -->
+              <button class="mem-tile mem-tile-0" data-tile="0" aria-label="Violet tile (C note)">
+                <div class="mem-tile-inner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="6" />
+                  </svg>
+                </div>
+              </button>
+
+              <!-- Tile 1: Radiant Cyan -->
+              <button class="mem-tile mem-tile-1" data-tile="1" aria-label="Cyan tile (E note)">
+                <div class="mem-tile-inner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="6" width="12" height="12" rx="2" />
+                  </svg>
+                </div>
+              </button>
+
+              <!-- Tile 2: Mint Emerald -->
+              <button class="mem-tile mem-tile-2" data-tile="2" aria-label="Emerald tile (G note)">
+                <div class="mem-tile-inner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 4 4 19 20 19 12 4" />
+                  </svg>
+                </div>
+              </button>
+
+              <!-- Tile 3: Warm Amber -->
+              <button class="mem-tile mem-tile-3" data-tile="3" aria-label="Amber tile (B note)">
+                <div class="mem-tile-inner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </button>
+            </div>
+
+            <!-- Pre-game overlay -->
+            <div class="game-overlay-prompt" id="mt-start-overlay">
+              <div class="overlay-modal-card">
+                <div class="overlay-icon-wrap icon-amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="8" height="8" rx="2" />
+                    <rect x="13" y="3" width="8" height="8" rx="2" />
+                    <rect x="3" y="13" width="8" height="8" rx="2" />
+                    <rect x="13" y="13" width="8" height="8" rx="2" />
+                  </svg>
+                </div>
+                <h3 class="overlay-title">Sequence Memory</h3>
+                <p class="overlay-desc">Watch the glowing tiles and listen to their harmonic notes. Repeat the pattern in order as the sequence grows!</p>
+                <button class="btn btn-primary btn-lg" id="mt-start-btn">Start Level 1</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== PLAY AREA: STAR HUNT ==================== -->
+        <section class="game-arena-section" id="arena-starHunt" aria-label="Star Hunt Arena" hidden>
+          <div class="arena-header">
+            <button class="btn btn-glass btn-sm back-to-hub-btn" aria-label="Return to games">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              <span>Back</span>
+            </button>
+            <div class="arena-title-wrap">
+              <h2 class="arena-game-name">Star Hunt</h2>
+              <span class="arena-mode-badge">30s Cosmic Reflex</span>
+            </div>
+            <div class="arena-header-controls">
+              <button class="btn btn-glass btn-icon-only" id="sh-pause-btn" title="Pause / Resume" aria-label="Pause game">
+                <svg id="sh-icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </svg>
+                <svg id="sh-icon-play" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </button>
+              <button class="btn btn-glass btn-icon-only" id="sh-restart-btn" title="Restart Game" aria-label="Restart game">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6M1 20v-6h6" />
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Score & Timer Bar -->
+          <div class="arena-scoreboard">
+            <div class="hud-item">
+              <span class="hud-label">Score</span>
+              <span class="hud-value hud-score" id="sh-score-val">0</span>
+            </div>
+            <div class="hud-item hud-timer-box">
+              <span class="hud-label">Time Remaining</span>
+              <div class="timer-display-wrap">
+                <span class="hud-value hud-timer" id="sh-timer-val">30</span>
+                <span class="hud-timer-unit">s</span>
+              </div>
+              <div class="timer-bar-track">
+                <div class="timer-bar-fill" id="sh-timer-bar"></div>
+              </div>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Stars Caught</span>
+              <span class="hud-value hud-combo" id="sh-caught-val">0</span>
+            </div>
+          </div>
+
+          <!-- Star Field Stage -->
+          <div class="arena-canvas-stage star-stage" id="sh-stage" tabindex="0" role="region" aria-label="Star field reaction zone">
+            <!-- Dynamic stars injected here -->
+            <div class="game-overlay-prompt" id="sh-start-overlay">
+              <div class="overlay-modal-card">
+                <div class="overlay-icon-wrap icon-amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+                <h3 class="overlay-title">Cosmic Star Hunt</h3>
+                <p class="overlay-desc">Stars will appear across the night sky. Tap them quickly before they drift away into space!</p>
+                <button class="btn btn-primary btn-lg" id="sh-start-btn">Start Hunt</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 3: BREATHING ROOM ==================== -->
+        <section class="view-section" id="view-breathing" aria-labelledby="breathing-heading">
+          <div class="breathing-container">
+            <div class="breathing-top-info">
+              <h1 class="view-main-title" id="breathing-heading">Breathing Room</h1>
+              <p class="view-main-subtitle">Inhale calm, exhale tension. Follow the rhythmic visual guide to settle your nervous system.</p>
+              
+              <!-- Session Length Selector -->
+              <div class="breathing-duration-selector" role="radiogroup" aria-label="Session duration">
+                <button class="duration-btn active" data-duration="60" role="radio" aria-checked="true">1 Minute</button>
+                <button class="duration-btn" data-duration="120" role="radio" aria-checked="false">2 Minutes</button>
+                <button class="duration-btn" data-duration="180" role="radio" aria-checked="false">3 Minutes</button>
+              </div>
+            </div>
+
+            <!-- Central Breathing Visualizer -->
+            <div class="breathing-visualizer-area">
+              <!-- Outer concentric aura rings -->
+              <div class="breathing-aura-ring ring-outer" id="br-ring-outer"></div>
+              <div class="breathing-aura-ring ring-mid" id="br-ring-mid"></div>
+              
+              <!-- Main Breathing Core Circle -->
+              <div class="breathing-circle-core" id="br-circle-core">
+                <div class="breathing-inner-content">
+                  <div class="breathing-phase-text" id="br-phase-label">Ready</div>
+                  <div class="breathing-countdown-number" id="br-phase-countdown">4</div>
+                  <div class="breathing-sub-instruction" id="br-phase-sub">Press Start to Begin</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Session Progress & Controls -->
+            <div class="breathing-bottom-panel">
+              <div class="breathing-session-clock">
+                <span class="clock-label">Session Remaining</span>
+                <span class="clock-value" id="br-session-timer">01:00</span>
+              </div>
+
+              <div class="breathing-controls-row">
+                <button class="btn btn-primary btn-lg" id="br-start-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span id="br-start-btn-text">Start Exercise</span>
+                </button>
+                <button class="btn btn-secondary btn-lg hidden" id="br-pause-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <rect x="6" y="4" width="4" height="16" />
+                    <rect x="14" y="4" width="4" height="16" />
+                  </svg>
+                  <span>Pause</span>
+                </button>
+                <button class="btn btn-glass btn-lg hidden" id="br-stop-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                  </svg>
+                  <span>Finish Early</span>
+                </button>
+              </div>
+
+              <p class="breathing-disclaimer">
+                Gentle reminder: Breathe at a natural, comfortable rhythm. You may pause or stop at any time.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 4: DAILY PROGRESS ==================== -->
+        <section class="view-section" id="view-progress" aria-labelledby="progress-heading">
+          <div class="section-title-wrap">
+            <h1 class="view-main-title" id="progress-heading">Personal Activity &amp; Progress</h1>
+            <p class="view-main-subtitle">Your mindful break milestones and statistics, saved securely in your browser.</p>
+          </div>
+
+          <!-- Overall Summary Cards -->
+          <div class="progress-summary-grid">
+            <div class="progress-card highlight-card">
+              <div class="p-card-icon icon-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                </svg>
+              </div>
+              <div class="p-card-body">
+                <div class="p-card-value" id="prog-streak-current">0 Days</div>
+                <div class="p-card-title">Daily Activity Streak</div>
+                <div class="p-card-sub" id="prog-streak-best">Best Streak: 0 days</div>
+              </div>
+            </div>
+
+            <div class="progress-card">
+              <div class="p-card-icon icon-violet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                </svg>
+              </div>
+              <div class="p-card-body">
+                <div class="p-card-value" id="prog-sessions-today">0</div>
+                <div class="p-card-title">Completed Today</div>
+                <div class="p-card-sub" id="prog-sessions-total">Total All-Time: 0</div>
+              </div>
+            </div>
+
+            <div class="progress-card">
+              <div class="p-card-icon icon-cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="8" />
+                  <circle cx="9" cy="9" r="2" />
+                </svg>
+              </div>
+              <div class="p-card-body">
+                <div class="p-card-value" id="prog-bubbles-total">0</div>
+                <div class="p-card-title">Bubbles Popped</div>
+                <div class="p-card-sub" id="prog-bubble-best">Best Score: 0</div>
+              </div>
+            </div>
+
+            <div class="progress-card">
+              <div class="p-card-icon icon-emerald">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+              </div>
+              <div class="p-card-body">
+                <div class="p-card-value" id="prog-breathing-total">0m</div>
+                <div class="p-card-title">Mindful Breathing</div>
+                <div class="p-card-sub" id="prog-breathing-sessions">0 sessions finished</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Best Scores Table -->
+          <div class="progress-section-panel">
+            <h2 class="panel-section-title">Personal Records</h2>
+            <div class="records-grid">
+              <div class="record-badge-card">
+                <div class="record-game-name">Bubble Pop</div>
+                <div class="record-score" id="record-bp-score">0 pts</div>
+                <div class="record-meta">30s High Score</div>
+              </div>
+              <div class="record-badge-card">
+                <div class="record-game-name">Colour Flow</div>
+                <div class="record-score" id="record-cf-score">0 pts</div>
+                <div class="record-meta">30s Accuracy High</div>
+              </div>
+              <div class="record-badge-card">
+                <div class="record-game-name">Memory Tiles</div>
+                <div class="record-score" id="record-mt-score">Level 0</div>
+                <div class="record-meta">Highest Sequence</div>
+              </div>
+              <div class="record-badge-card">
+                <div class="record-game-name">Star Hunt</div>
+                <div class="record-score" id="record-sh-score">0 pts</div>
+                <div class="record-meta">Cosmic High Score</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Session History Log -->
+          <div class="progress-section-panel">
+            <div class="panel-header">
+              <h2 class="panel-section-title">Session History</h2>
+              <span class="history-count-badge" id="history-count">0 Sessions</span>
+            </div>
+            <div class="history-table-container">
+              <table class="history-table" id="history-table">
+                <thead>
+                  <tr>
+                    <th>Date &amp; Time</th>
+                    <th>Activity</th>
+                    <th>Result / Duration</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="history-table-body">
+                  <!-- Injected dynamically or empty message -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 5: SETTINGS ==================== -->
+        <section class="view-section" id="view-settings" aria-labelledby="settings-heading">
+          <div class="section-title-wrap">
+            <h1 class="view-main-title" id="settings-heading">Application Settings</h1>
+            <p class="view-main-subtitle">Tailor your ZenFlow experience to your preferences and comfort.</p>
+          </div>
+
+          <div class="settings-container">
+            <!-- Audio Preferences -->
+            <div class="settings-group-card">
+              <h2 class="settings-group-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-svg">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+                <span>Audio &amp; Sounds</span>
+              </h2>
+
+              <div class="setting-item-row">
+                <div class="setting-item-text">
+                  <div class="setting-item-label">Sound Effects</div>
+                  <div class="setting-item-desc">Enable synthesized audio pops, gentle chimes, and breathing harmonics.</div>
+                </div>
+                <button class="toggle-switch" id="setting-sound-toggle" role="switch" aria-checked="true" aria-label="Toggle sound effects">
+                  <span class="toggle-slider"></span>
+                </button>
+              </div>
+
+              <div class="setting-item-row">
+                <div class="setting-item-text">
+                  <div class="setting-item-label">Master Volume</div>
+                  <div class="setting-item-desc">Adjust the volume of all in-game sound cues.</div>
+                </div>
+                <div class="volume-slider-wrapper">
+                  <input type="range" min="0" max="1" step="0.05" value="0.5" id="setting-volume-slider" class="styled-range-slider" aria-label="Master volume">
+                  <span class="volume-value-label" id="volume-val-label">50%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visual & Themes -->
+            <div class="settings-group-card">
+              <h2 class="settings-group-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-svg">
+                  <circle cx="12" cy="12" r="5" />
+                  <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+                <span>Display &amp; Theme</span>
+              </h2>
+
+              <div class="setting-item-row">
+                <div class="setting-item-text">
+                  <div class="setting-item-label">Color Theme</div>
+                  <div class="setting-item-desc">Select between Cosmic Deep Navy (Dark) or Calm Serene Sky (Light).</div>
+                </div>
+                <div class="theme-button-group">
+                  <button class="theme-choice-btn active" data-theme-val="dark" id="theme-btn-dark">Dark Mode</button>
+                  <button class="theme-choice-btn" data-theme-val="light" id="theme-btn-light">Light Mode</button>
+                </div>
+              </div>
+
+              <div class="setting-item-row">
+                <div class="setting-item-text">
+                  <div class="setting-item-label">Animation &amp; Motion</div>
+                  <div class="setting-item-desc">Choose your visual motion level. Reduced motion dims or stops intensive animations.</div>
+                </div>
+                <div class="theme-button-group">
+                  <button class="motion-choice-btn active" data-motion-val="full" id="motion-btn-full">Full Animations</button>
+                  <button class="motion-choice-btn" data-motion-val="reduced" id="motion-btn-reduced">Reduced Motion</button>
+                </div>
+              </div>
+
+              <div class="setting-item-row">
+                <div class="setting-item-text">
+                  <div class="setting-item-label">Cosmic Particle Background</div>
+                  <div class="setting-item-desc">Show subtle ambient orbs drifting smoothly in the background.</div>
+                </div>
+                <button class="toggle-switch" id="setting-particles-toggle" role="switch" aria-checked="true" aria-label="Toggle floating background particles">
+                  <span class="toggle-slider"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Data & Privacy -->
+            <div class="settings-group-card danger-zone">
+              <h2 class="settings-group-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-svg">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                  <polyline points="7 3 7 8 15 8" />
+                </svg>
+                <span>Data &amp; Local Storage</span>
+              </h2>
+
+              <div class="setting-item-row">
+                <div class="setting-item-text">
+                  <div class="setting-item-label">Reset All Saved Progress</div>
+                  <div class="setting-item-desc">Clears your streaks, high scores, and activity history from this browser. This cannot be undone.</div>
+                </div>
+                <button class="btn btn-danger" id="btn-reset-data">Reset Data</button>
+              </div>
+
+              <div class="storage-notice-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="notice-svg">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+                <p>
+                  <strong>Browser Storage Note:</strong> ZenFlow runs entirely in your client browser. Your stats are stored in your device's <code>localStorage</code> and are never transmitted to any external servers.
+                </p>
+              </div>
+            </div>
+
+            <!-- About ZenFlow -->
+            <div class="settings-group-card">
+              <h2 class="settings-group-title">About ZenFlow</h2>
+              <p class="about-text">
+                <strong>ZenFlow v1.0.0</strong> — Designed as a premium, zero-distraction wellness oasis for students, coders, and professionals. Built with pure HTML5, CSS3, and vanilla modern JavaScript.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- App Footer -->
+      <footer class="app-footer">
+        <p>ZenFlow — Take a Little Break &bull; Refresh your mind, elevate your day.</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ==================== UNIVERSAL GAME OVER / RESULTS MODAL ==================== -->
+  <div class="modal-backdrop" id="results-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-game-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-icon-bubble" id="modal-icon-bubble">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+        </div>
+        <h2 class="modal-title" id="modal-game-title">Session Complete!</h2>
+        <p class="modal-subtitle" id="modal-game-subtitle">Great job taking a moment for yourself.</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-highlight-box">
+          <span class="modal-highlight-label" id="modal-stat-label">Final Score</span>
+          <span class="modal-highlight-value" id="modal-stat-value">0</span>
+          <div class="modal-new-best-badge hidden" id="modal-new-best">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="best-star-svg">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <span>New Personal Best!</span>
+          </div>
+        </div>
+
+        <div class="modal-details-grid" id="modal-details-grid">
+          <!-- Dynamic supplementary stats -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-btn-hub">Return to Games</button>
+        <button class="btn btn-primary" id="modal-btn-replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg-sm">
+            <path d="M23 4v6h-6M1 20v-6h6" />
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+          </svg>
+          <span>Play Again</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONFIRMATION DIALOG MODAL ==================== -->
+  <div class="modal-backdrop" id="confirm-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+    <div class="modal-dialog confirm-dialog">
+      <div class="confirm-header">
+        <div class="confirm-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        </div>
+        <h3 class="confirm-title" id="confirm-modal-title">Reset All Saved Progress?</h3>
+      </div>
+      <div class="confirm-body">
+        <p id="confirm-modal-message">This will permanently erase your daily break streak, high scores, and activity records. Are you sure you wish to continue?</p>
+      </div>
+      <div class="confirm-footer">
+        <button class="btn btn-glass" id="confirm-btn-cancel">Cancel</button>
+        <button class="btn btn-danger" id="confirm-btn-confirm">Yes, Reset Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION CONTAINER ==================== -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-nav-bar" id="mobile-nav-bar" aria-label="Mobile Navigation">
+    <button class="mob-nav-btn active" data-view="dashboard" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="9" rx="1.5" />
+        <rect x="14" y="3" width="7" height="5" rx="1.5" />
+        <rect x="14" y="12" width="7" height="9" rx="1.5" />
+        <rect x="3" y="16" width="7" height="5" rx="1.5" />
+      </svg>
+      <span>Home</span>
+    </button>
+    <button class="mob-nav-btn" data-view="games" aria-label="Games">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="6 3 20 12 6 21 6 3" />
+      </svg>
+      <span>Games</span>
+    </button>
+    <button class="mob-nav-btn" data-view="breathing" aria-label="Breathe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 3" />
+      </svg>
+      <span>Breathe</span>
+    </button>
+    <button class="mob-nav-btn" data-view="progress" aria-label="Progress">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 20V10" />
+        <path d="M12 20V4" />
+        <path d="M6 20v-6" />
+      </svg>
+      <span>Progress</span>
+    </button>
+    <button class="mob-nav-btn" data-view="settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      </svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

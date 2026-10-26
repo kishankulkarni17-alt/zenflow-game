@@ -1686,7 +1686,9 @@
       this.breathingRoom = new BreathingRoom(this);
 
       this.currentView = 'dashboard';
+      this.previousView = 'dashboard';
       this.activeGameArena = null;
+      this.isRouteHandling = false;
 
       this.initDOM();
       this.applySettings();
@@ -1733,8 +1735,7 @@
 
       document.querySelectorAll('.back-to-hub-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
-          this.leaveCurrentGame();
-          this.navigateTo('games');
+          this.leaveCurrentGame(true);
         });
       });
 
@@ -1921,8 +1922,10 @@
       });
     }
 
-    navigateTo(viewId) {
-      this.leaveCurrentGame();
+    navigateTo(viewId, updateHash = true) {
+      if (viewId === 'home') viewId = 'dashboard';
+
+      this.leaveCurrentGame(false);
 
       document.querySelectorAll('.view-section').forEach((sec) => {
         sec.classList.remove('active');
@@ -1932,12 +1935,23 @@
       if (targetSec) {
         targetSec.classList.add('active');
         this.currentView = viewId;
+        if (viewId !== 'breathing') {
+          this.previousView = viewId;
+        }
+      } else {
+        const fallbackSec = document.getElementById('view-dashboard');
+        if (fallbackSec) fallbackSec.classList.add('active');
+        this.currentView = 'dashboard';
+        this.previousView = 'dashboard';
+        viewId = 'dashboard';
       }
+
+      document.body.classList.remove('in-game');
 
       const breadcrumb = document.getElementById('breadcrumb-current');
       if (breadcrumb) {
         const titles = {
-          dashboard: 'Dashboard',
+          dashboard: 'Home',
           games: 'Mini-Games Hub',
           breathing: 'Breathing Room',
           progress: 'Daily Progress',
@@ -1946,9 +1960,13 @@
         breadcrumb.textContent = titles[viewId] || 'ZenFlow';
       }
 
+      // Map breathing to games in top/bottom nav for active tab indication
+      const activeNavKey = viewId === 'breathing' ? 'games' : viewId;
+
       document.querySelectorAll('.nav-link').forEach((link) => {
-        link.classList.toggle('active', link.dataset.view === viewId);
-        if (link.dataset.view === viewId) {
+        const isActive = link.dataset.view === activeNavKey;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
           link.setAttribute('aria-current', 'page');
         } else {
           link.removeAttribute('aria-current');
@@ -1956,19 +1974,45 @@
       });
 
       document.querySelectorAll('.mob-nav-btn').forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.view === viewId);
+        const isActive = btn.dataset.view === activeNavKey;
+        btn.classList.toggle('active', isActive);
       });
 
       const sidebar = document.getElementById('sidebar');
+      const mobileToggle = document.getElementById('mobile-menu-toggle');
       if (sidebar) sidebar.classList.remove('mobile-open');
+      if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+
+      if (updateHash) {
+        const routeHash = viewId === 'dashboard' ? 'home' : viewId;
+        if (window.location.hash.replace(/^#\/?/, '') !== routeHash) {
+          this.isRouteHandling = true;
+          window.location.hash = routeHash;
+          setTimeout(() => {
+            this.isRouteHandling = false;
+          }, 40);
+        }
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    launchGame(gameId) {
-      if (!this.games[gameId]) return;
+    launchGame(gameId, updateHash = true) {
+      if (gameId === 'breathing') {
+        this.navigateTo('breathing', updateHash);
+        return;
+      }
 
-      this.leaveCurrentGame();
+      if (!this.games[gameId]) {
+        this.navigateTo('games', updateHash);
+        return;
+      }
+
+      if (this.currentView && this.currentView !== 'arena') {
+        this.previousView = this.currentView;
+      }
+
+      this.leaveCurrentGame(false);
 
       document.querySelectorAll('.view-section').forEach((sec) => {
         sec.classList.remove('active');
@@ -1979,7 +2023,10 @@
         arena.hidden = false;
         arena.style.display = 'flex';
         this.activeGameArena = gameId;
+        this.currentView = 'arena';
       }
+
+      document.body.classList.add('in-game');
 
       const overlayMap = {
         bubblePop: 'bp-start-overlay',
@@ -1997,10 +2044,34 @@
         breadcrumb.textContent = `Mini-Games / ${this.getGameTitle(gameId)}`;
       }
 
+      // Highlight Games tab in sidebar while in game
+      document.querySelectorAll('.nav-link').forEach((link) => {
+        const isActive = link.dataset.view === 'games';
+        link.classList.toggle('active', isActive);
+        if (isActive) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+
+      const sidebar = document.getElementById('sidebar');
+      const mobileToggle = document.getElementById('mobile-menu-toggle');
+      if (sidebar) sidebar.classList.remove('mobile-open');
+      if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+
+      if (updateHash) {
+        const gameRoute = `game/${gameId}`;
+        if (window.location.hash.replace(/^#\/?/, '') !== gameRoute) {
+          this.isRouteHandling = true;
+          window.location.hash = gameRoute;
+          setTimeout(() => {
+            this.isRouteHandling = false;
+          }, 40);
+        }
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    leaveCurrentGame() {
+    leaveCurrentGame(navigateBack = false) {
       if (this.activeGameArena && this.games[this.activeGameArena]) {
         this.games[this.activeGameArena].cleanup();
         const arena = document.getElementById(`arena-${this.activeGameArena}`);
@@ -2011,6 +2082,12 @@
         this.activeGameArena = null;
       }
       this.breathingRoom.cleanup();
+      document.body.classList.remove('in-game');
+
+      if (navigateBack) {
+        const returnTarget = (this.previousView && this.previousView !== 'arena') ? this.previousView : 'games';
+        this.navigateTo(returnTarget, true);
+      }
     }
 
     getGameTitle(gameId) {
@@ -2075,7 +2152,7 @@
 
       if (hubBP) hubBP.textContent = `Best: ${stats.bestScores.bubblePop}`;
       if (hubCF) hubCF.textContent = `Best: ${stats.bestScores.colourFlow}`;
-      if (hubMT) hubMT.textContent = `Best: ${stats.bestScores.colourFlow}`;
+      if (hubMT) hubMT.textContent = `Lvl: ${stats.bestScores.memoryTiles}`;
       if (hubSH) hubSH.textContent = `Best: ${stats.bestScores.starHunt}`;
 
       const pStreakCur = document.getElementById('prog-streak-current');
@@ -2303,11 +2380,38 @@
     }
 
     initRoutes() {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && ['dashboard', 'games', 'breathing', 'progress', 'settings'].includes(hash)) {
-        this.navigateTo(hash);
+      window.addEventListener('hashchange', () => {
+        if (this.isRouteHandling) return;
+        this.handleRouteFromHash();
+      });
+      this.handleRouteFromHash();
+    }
+
+    handleRouteFromHash() {
+      const raw = window.location.hash.replace(/^#\/?/, '').trim();
+      if (!raw || raw === 'home' || raw === 'dashboard') {
+        if (this.currentView !== 'dashboard' || this.activeGameArena !== null) {
+          this.navigateTo('dashboard', false);
+        }
+      } else if (raw.startsWith('game/')) {
+        const gameId = raw.replace('game/', '').trim();
+        if (gameId === 'breathing') {
+          if (this.currentView !== 'breathing' || this.activeGameArena !== null) {
+            this.navigateTo('breathing', false);
+          }
+        } else if (this.games[gameId]) {
+          if (this.activeGameArena !== gameId) {
+            this.launchGame(gameId, false);
+          }
+        } else {
+          this.navigateTo('games', false);
+        }
+      } else if (['games', 'breathing', 'progress', 'settings'].includes(raw)) {
+        if (this.currentView !== raw || this.activeGameArena !== null) {
+          this.navigateTo(raw, false);
+        }
       } else {
-        this.navigateTo('dashboard');
+        this.navigateTo('dashboard', false);
       }
     }
   }
